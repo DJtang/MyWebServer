@@ -1,0 +1,3 @@
+C:/Users/11240/Desktop/MyWebServer/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/11240/Desktop/MyWebServer/cmake-build-debug/CMakeFiles/MyWebServer.dir
+C:/Users/11240/Desktop/MyWebServer/cmake-build-debug/CMakeFiles/rebuild_cache.dir
