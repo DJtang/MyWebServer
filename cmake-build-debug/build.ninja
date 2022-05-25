@@ -58,19 +58,13 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 #############################################
 # Order-only phony target for MyWebServer
 
-build cmake_object_order_depends_target_MyWebServer: phony || CMakeFiles/MyWebServer.dir
+build cmake_object_order_depends_target_MyWebServer: phony || cmake_object_order_depends_target_Http cmake_object_order_depends_target_Log cmake_object_order_depends_target_Pool cmake_object_order_depends_target_Server cmake_object_order_depends_target_Timer
 
-build CMakeFiles/MyWebServer.dir/main.cpp.obj: CXX_COMPILER__MyWebServer_Debug C$:/Users/11240/Desktop/MyWebServer/main.cpp || cmake_object_order_depends_target_MyWebServer
-  DEP_FILE = CMakeFiles\MyWebServer.dir\main.cpp.obj.d
+build CMakeFiles/MyWebServer.dir/src/main.cpp.obj: CXX_COMPILER__MyWebServer_Debug C$:/Users/11240/Desktop/MyWebServer/src/main.cpp || cmake_object_order_depends_target_MyWebServer
+  DEP_FILE = CMakeFiles\MyWebServer.dir\src\main.cpp.obj.d
   FLAGS = -g -std=gnu++14
   OBJECT_DIR = CMakeFiles\MyWebServer.dir
-  OBJECT_FILE_DIR = CMakeFiles\MyWebServer.dir
-
-build CMakeFiles/MyWebServer.dir/webserver/webserver.cpp.obj: CXX_COMPILER__MyWebServer_Debug C$:/Users/11240/Desktop/MyWebServer/webserver/webserver.cpp || cmake_object_order_depends_target_MyWebServer
-  DEP_FILE = CMakeFiles\MyWebServer.dir\webserver\webserver.cpp.obj.d
-  FLAGS = -g -std=gnu++14
-  OBJECT_DIR = CMakeFiles\MyWebServer.dir
-  OBJECT_FILE_DIR = CMakeFiles\MyWebServer.dir\webserver
+  OBJECT_FILE_DIR = CMakeFiles\MyWebServer.dir\src
 
 
 # =============================================================================
@@ -80,9 +74,9 @@ build CMakeFiles/MyWebServer.dir/webserver/webserver.cpp.obj: CXX_COMPILER__MyWe
 #############################################
 # Link the executable MyWebServer.exe
 
-build MyWebServer.exe: CXX_EXECUTABLE_LINKER__MyWebServer_Debug CMakeFiles/MyWebServer.dir/main.cpp.obj CMakeFiles/MyWebServer.dir/webserver/webserver.cpp.obj
+build MyWebServer.exe: CXX_EXECUTABLE_LINKER__MyWebServer_Debug CMakeFiles/MyWebServer.dir/src/main.cpp.obj | src/http/libHttp.a src/log/libLog.a src/pool/libPool.a src/server/libServer.a src/timer/libTimer.a || src/http/libHttp.a src/log/libLog.a src/pool/libPool.a src/server/libServer.a src/timer/libTimer.a
   FLAGS = -g
-  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = -lBuffer  src/http/libHttp.a  src/log/libLog.a  src/pool/libPool.a  src/server/libServer.a  src/timer/libTimer.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\MyWebServer.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
@@ -103,9 +97,370 @@ build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 # =============================================================================
+# Write statements declared in CMakeLists.txt:
+# C:/Users/11240/Desktop/MyWebServer/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for edit_cache
+
+build src/buffer/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\11240\Desktop\MyWebServer\cmake-build-debug\src\buffer && "F:\CLion 2021.3.3\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build src/buffer/edit_cache: phony src/buffer/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build src/buffer/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\11240\Desktop\MyWebServer\cmake-build-debug\src\buffer && "F:\CLion 2021.3.3\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\Users\11240\Desktop\MyWebServer -BC:\Users\11240\Desktop\MyWebServer\cmake-build-debug"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build src/buffer/rebuild_cache: phony src/buffer/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# C:/Users/11240/Desktop/MyWebServer/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build src/http/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\11240\Desktop\MyWebServer\cmake-build-debug\src\http && "F:\CLion 2021.3.3\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\Users\11240\Desktop\MyWebServer -BC:\Users\11240\Desktop\MyWebServer\cmake-build-debug"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build src/http/rebuild_cache: phony src/http/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target Http
+
+
+#############################################
+# Order-only phony target for Http
+
+build cmake_object_order_depends_target_Http: phony || src/http/CMakeFiles/Http.dir
+
+build src/http/CMakeFiles/Http.dir/httpconn.cpp.obj: CXX_COMPILER__Http_Debug C$:/Users/11240/Desktop/MyWebServer/src/http/httpconn.cpp || cmake_object_order_depends_target_Http
+  DEP_FILE = src\http\CMakeFiles\Http.dir\httpconn.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = src\http\CMakeFiles\Http.dir
+  OBJECT_FILE_DIR = src\http\CMakeFiles\Http.dir
+
+build src/http/CMakeFiles/Http.dir/httprequest.cpp.obj: CXX_COMPILER__Http_Debug C$:/Users/11240/Desktop/MyWebServer/src/http/httprequest.cpp || cmake_object_order_depends_target_Http
+  DEP_FILE = src\http\CMakeFiles\Http.dir\httprequest.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = src\http\CMakeFiles\Http.dir
+  OBJECT_FILE_DIR = src\http\CMakeFiles\Http.dir
+
+build src/http/CMakeFiles/Http.dir/httpresponse.cpp.obj: CXX_COMPILER__Http_Debug C$:/Users/11240/Desktop/MyWebServer/src/http/httpresponse.cpp || cmake_object_order_depends_target_Http
+  DEP_FILE = src\http\CMakeFiles\Http.dir\httpresponse.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = src\http\CMakeFiles\Http.dir
+  OBJECT_FILE_DIR = src\http\CMakeFiles\Http.dir
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target Http
+
+
+#############################################
+# Link the static library src\http\libHttp.a
+
+build src/http/libHttp.a: CXX_STATIC_LIBRARY_LINKER__Http_Debug src/http/CMakeFiles/Http.dir/httpconn.cpp.obj src/http/CMakeFiles/Http.dir/httprequest.cpp.obj src/http/CMakeFiles/Http.dir/httpresponse.cpp.obj
+  LANGUAGE_COMPILE_FLAGS = -g
+  OBJECT_DIR = src\http\CMakeFiles\Http.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = src\http\libHttp.a
+  TARGET_PDB = Http.a.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build src/http/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\11240\Desktop\MyWebServer\cmake-build-debug\src\http && "F:\CLion 2021.3.3\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build src/http/edit_cache: phony src/http/CMakeFiles/edit_cache.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# C:/Users/11240/Desktop/MyWebServer/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target Log
+
+
+#############################################
+# Order-only phony target for Log
+
+build cmake_object_order_depends_target_Log: phony || src/log/CMakeFiles/Log.dir
+
+build src/log/CMakeFiles/Log.dir/log.cpp.obj: CXX_COMPILER__Log_Debug C$:/Users/11240/Desktop/MyWebServer/src/log/log.cpp || cmake_object_order_depends_target_Log
+  DEP_FILE = src\log\CMakeFiles\Log.dir\log.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = src\log\CMakeFiles\Log.dir
+  OBJECT_FILE_DIR = src\log\CMakeFiles\Log.dir
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target Log
+
+
+#############################################
+# Link the static library src\log\libLog.a
+
+build src/log/libLog.a: CXX_STATIC_LIBRARY_LINKER__Log_Debug src/log/CMakeFiles/Log.dir/log.cpp.obj
+  LANGUAGE_COMPILE_FLAGS = -g
+  OBJECT_DIR = src\log\CMakeFiles\Log.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = src\log\libLog.a
+  TARGET_PDB = Log.a.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build src/log/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\11240\Desktop\MyWebServer\cmake-build-debug\src\log && "F:\CLion 2021.3.3\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build src/log/edit_cache: phony src/log/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build src/log/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\11240\Desktop\MyWebServer\cmake-build-debug\src\log && "F:\CLion 2021.3.3\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\Users\11240\Desktop\MyWebServer -BC:\Users\11240\Desktop\MyWebServer\cmake-build-debug"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build src/log/rebuild_cache: phony src/log/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# C:/Users/11240/Desktop/MyWebServer/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target Pool
+
+
+#############################################
+# Order-only phony target for Pool
+
+build cmake_object_order_depends_target_Pool: phony || src/pool/CMakeFiles/Pool.dir
+
+build src/pool/CMakeFiles/Pool.dir/sqlconnpool.cpp.obj: CXX_COMPILER__Pool_Debug C$:/Users/11240/Desktop/MyWebServer/src/pool/sqlconnpool.cpp || cmake_object_order_depends_target_Pool
+  DEP_FILE = src\pool\CMakeFiles\Pool.dir\sqlconnpool.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = src\pool\CMakeFiles\Pool.dir
+  OBJECT_FILE_DIR = src\pool\CMakeFiles\Pool.dir
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target Pool
+
+
+#############################################
+# Link the static library src\pool\libPool.a
+
+build src/pool/libPool.a: CXX_STATIC_LIBRARY_LINKER__Pool_Debug src/pool/CMakeFiles/Pool.dir/sqlconnpool.cpp.obj
+  LANGUAGE_COMPILE_FLAGS = -g
+  OBJECT_DIR = src\pool\CMakeFiles\Pool.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = src\pool\libPool.a
+  TARGET_PDB = Pool.a.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build src/pool/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\11240\Desktop\MyWebServer\cmake-build-debug\src\pool && "F:\CLion 2021.3.3\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build src/pool/edit_cache: phony src/pool/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build src/pool/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\11240\Desktop\MyWebServer\cmake-build-debug\src\pool && "F:\CLion 2021.3.3\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\Users\11240\Desktop\MyWebServer -BC:\Users\11240\Desktop\MyWebServer\cmake-build-debug"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build src/pool/rebuild_cache: phony src/pool/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# C:/Users/11240/Desktop/MyWebServer/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target Server
+
+
+#############################################
+# Order-only phony target for Server
+
+build cmake_object_order_depends_target_Server: phony || src/server/CMakeFiles/Server.dir
+
+build src/server/CMakeFiles/Server.dir/epoller.cpp.obj: CXX_COMPILER__Server_Debug C$:/Users/11240/Desktop/MyWebServer/src/server/epoller.cpp || cmake_object_order_depends_target_Server
+  DEP_FILE = src\server\CMakeFiles\Server.dir\epoller.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = src\server\CMakeFiles\Server.dir
+  OBJECT_FILE_DIR = src\server\CMakeFiles\Server.dir
+
+build src/server/CMakeFiles/Server.dir/webserver.cpp.obj: CXX_COMPILER__Server_Debug C$:/Users/11240/Desktop/MyWebServer/src/server/webserver.cpp || cmake_object_order_depends_target_Server
+  DEP_FILE = src\server\CMakeFiles\Server.dir\webserver.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = src\server\CMakeFiles\Server.dir
+  OBJECT_FILE_DIR = src\server\CMakeFiles\Server.dir
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target Server
+
+
+#############################################
+# Link the static library src\server\libServer.a
+
+build src/server/libServer.a: CXX_STATIC_LIBRARY_LINKER__Server_Debug src/server/CMakeFiles/Server.dir/epoller.cpp.obj src/server/CMakeFiles/Server.dir/webserver.cpp.obj
+  LANGUAGE_COMPILE_FLAGS = -g
+  OBJECT_DIR = src\server\CMakeFiles\Server.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = src\server\libServer.a
+  TARGET_PDB = Server.a.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build src/server/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\11240\Desktop\MyWebServer\cmake-build-debug\src\server && "F:\CLion 2021.3.3\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build src/server/edit_cache: phony src/server/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build src/server/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\11240\Desktop\MyWebServer\cmake-build-debug\src\server && "F:\CLion 2021.3.3\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\Users\11240\Desktop\MyWebServer -BC:\Users\11240\Desktop\MyWebServer\cmake-build-debug"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build src/server/rebuild_cache: phony src/server/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# C:/Users/11240/Desktop/MyWebServer/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target Timer
+
+
+#############################################
+# Order-only phony target for Timer
+
+build cmake_object_order_depends_target_Timer: phony || src/timer/CMakeFiles/Timer.dir
+
+build src/timer/CMakeFiles/Timer.dir/heaptimer.cpp.obj: CXX_COMPILER__Timer_Debug C$:/Users/11240/Desktop/MyWebServer/src/timer/heaptimer.cpp || cmake_object_order_depends_target_Timer
+  DEP_FILE = src\timer\CMakeFiles\Timer.dir\heaptimer.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = src\timer\CMakeFiles\Timer.dir
+  OBJECT_FILE_DIR = src\timer\CMakeFiles\Timer.dir
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target Timer
+
+
+#############################################
+# Link the static library src\timer\libTimer.a
+
+build src/timer/libTimer.a: CXX_STATIC_LIBRARY_LINKER__Timer_Debug src/timer/CMakeFiles/Timer.dir/heaptimer.cpp.obj
+  LANGUAGE_COMPILE_FLAGS = -g
+  OBJECT_DIR = src\timer\CMakeFiles\Timer.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = src\timer\libTimer.a
+  TARGET_PDB = Timer.a.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build src/timer/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\11240\Desktop\MyWebServer\cmake-build-debug\src\timer && "F:\CLion 2021.3.3\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build src/timer/edit_cache: phony src/timer/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build src/timer/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\11240\Desktop\MyWebServer\cmake-build-debug\src\timer && "F:\CLion 2021.3.3\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\Users\11240\Desktop\MyWebServer -BC:\Users\11240\Desktop\MyWebServer\cmake-build-debug"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build src/timer/rebuild_cache: phony src/timer/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
 # Target aliases.
 
+build Http: phony src/http/libHttp.a
+
+build Log: phony src/log/libLog.a
+
 build MyWebServer: phony MyWebServer.exe
+
+build Pool: phony src/pool/libPool.a
+
+build Server: phony src/server/libServer.a
+
+build Timer: phony src/timer/libTimer.a
+
+build libHttp.a: phony src/http/libHttp.a
+
+build libLog.a: phony src/log/libLog.a
+
+build libPool.a: phony src/pool/libPool.a
+
+build libServer.a: phony src/server/libServer.a
+
+build libTimer.a: phony src/timer/libTimer.a
 
 # =============================================================================
 # Folder targets.
@@ -115,7 +470,49 @@ build MyWebServer: phony MyWebServer.exe
 #############################################
 # Folder: C:/Users/11240/Desktop/MyWebServer/cmake-build-debug
 
-build all: phony MyWebServer.exe
+build all: phony MyWebServer.exe src/buffer/all src/http/all src/log/all src/pool/all src/server/all src/timer/all
+
+# =============================================================================
+
+#############################################
+# Folder: C:/Users/11240/Desktop/MyWebServer/cmake-build-debug/src/buffer
+
+build src/buffer/all: phony
+
+# =============================================================================
+
+#############################################
+# Folder: C:/Users/11240/Desktop/MyWebServer/cmake-build-debug/src/http
+
+build src/http/all: phony src/http/libHttp.a
+
+# =============================================================================
+
+#############################################
+# Folder: C:/Users/11240/Desktop/MyWebServer/cmake-build-debug/src/log
+
+build src/log/all: phony src/log/libLog.a
+
+# =============================================================================
+
+#############################################
+# Folder: C:/Users/11240/Desktop/MyWebServer/cmake-build-debug/src/pool
+
+build src/pool/all: phony src/pool/libPool.a
+
+# =============================================================================
+
+#############################################
+# Folder: C:/Users/11240/Desktop/MyWebServer/cmake-build-debug/src/server
+
+build src/server/all: phony src/server/libServer.a
+
+# =============================================================================
+
+#############################################
+# Folder: C:/Users/11240/Desktop/MyWebServer/cmake-build-debug/src/timer
+
+build src/timer/all: phony src/timer/libTimer.a
 
 # =============================================================================
 # Built-in targets
@@ -124,14 +521,14 @@ build all: phony MyWebServer.exe
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ../CMakeLists.txt CMakeCache.txt CMakeFiles/3.21.1/CMakeCCompiler.cmake CMakeFiles/3.21.1/CMakeCXXCompiler.cmake CMakeFiles/3.21.1/CMakeRCCompiler.cmake CMakeFiles/3.21.1/CMakeSystem.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeCInformation.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeCXXInformation.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeCommonLanguageInclude.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeGenericSystem.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeInitializeConfigs.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeLanguageInformation.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeRCInformation.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeSystemSpecificInformation.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeSystemSpecificInitialize.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Compiler/CMakeCommonCompilerMacros.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Compiler/GNU-C.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Compiler/GNU-CXX.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Compiler/GNU.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-GNU-C-ABI.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-GNU-C.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-GNU-CXX-ABI.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-GNU-CXX.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-GNU.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-windres.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/WindowsPaths.cmake
+build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../src/buffer/CMakeLists.txt ../src/http/CMakeLists.txt ../src/log/CMakeLists.txt ../src/pool/CMakeLists.txt ../src/server/CMakeLists.txt ../src/timer/CMakeLists.txt CMakeCache.txt CMakeFiles/3.21.1/CMakeCCompiler.cmake CMakeFiles/3.21.1/CMakeCXXCompiler.cmake CMakeFiles/3.21.1/CMakeRCCompiler.cmake CMakeFiles/3.21.1/CMakeSystem.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeCInformation.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeCXXInformation.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeCommonLanguageInclude.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeGenericSystem.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeInitializeConfigs.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeLanguageInformation.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeRCInformation.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeSystemSpecificInformation.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeSystemSpecificInitialize.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Compiler/CMakeCommonCompilerMacros.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Compiler/GNU-C.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Compiler/GNU-CXX.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Compiler/GNU.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-GNU-C-ABI.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-GNU-C.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-GNU-CXX-ABI.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-GNU-CXX.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-GNU.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-windres.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/WindowsPaths.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ../CMakeLists.txt CMakeCache.txt CMakeFiles/3.21.1/CMakeCCompiler.cmake CMakeFiles/3.21.1/CMakeCXXCompiler.cmake CMakeFiles/3.21.1/CMakeRCCompiler.cmake CMakeFiles/3.21.1/CMakeSystem.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeCInformation.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeCXXInformation.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeCommonLanguageInclude.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeGenericSystem.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeInitializeConfigs.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeLanguageInformation.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeRCInformation.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeSystemSpecificInformation.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeSystemSpecificInitialize.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Compiler/CMakeCommonCompilerMacros.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Compiler/GNU-C.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Compiler/GNU-CXX.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Compiler/GNU.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-GNU-C-ABI.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-GNU-C.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-GNU-CXX-ABI.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-GNU-CXX.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-GNU.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-windres.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/WindowsPaths.cmake: phony
+build ../CMakeLists.txt ../src/buffer/CMakeLists.txt ../src/http/CMakeLists.txt ../src/log/CMakeLists.txt ../src/pool/CMakeLists.txt ../src/server/CMakeLists.txt ../src/timer/CMakeLists.txt CMakeCache.txt CMakeFiles/3.21.1/CMakeCCompiler.cmake CMakeFiles/3.21.1/CMakeCXXCompiler.cmake CMakeFiles/3.21.1/CMakeRCCompiler.cmake CMakeFiles/3.21.1/CMakeSystem.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeCInformation.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeCXXInformation.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeCommonLanguageInclude.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeGenericSystem.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeInitializeConfigs.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeLanguageInformation.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeRCInformation.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeSystemSpecificInformation.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/CMakeSystemSpecificInitialize.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Compiler/CMakeCommonCompilerMacros.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Compiler/GNU-C.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Compiler/GNU-CXX.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Compiler/GNU.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-GNU-C-ABI.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-GNU-C.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-GNU-CXX-ABI.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-GNU-CXX.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-GNU.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows-windres.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/Windows.cmake F$:/CLion$ 2021.3.3/bin/cmake/win/share/cmake-3.21/Modules/Platform/WindowsPaths.cmake: phony
 
 
 #############################################
