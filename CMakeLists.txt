@@ -3,4 +3,4 @@ project(MyWebServer)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(MyWebServer main.cpp)
+add_executable(MyWebServer main.cpp webserver/webserver.cpp webserver/webserver.h)
