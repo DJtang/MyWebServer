@@ -1,6 +1,8 @@
 //
 // Created by 11240 on 2022/1/25.
 //
+#ifndef EPOLLER_H
+#define EPOLLER_H
 
 #include <sys/epoll.h> //epoll_ctl()
 #include <fcntl.h>  // fcntl()

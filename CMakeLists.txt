@@ -53,4 +53,4 @@ add_executable(MyWebServer ${DIR_SRCS} ${SOURCE})
 
 # 链接静态函数库
 #target_link_libraries(MyWebServer pthread mysqlclient)
-target_link_libraries(MyWebServer Buffer Http Log Pool Server Timer)
+target_link_libraries(MyWebServer Server Http Buffer Log Pool Timer pthread mysqlclient)

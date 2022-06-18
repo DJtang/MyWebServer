@@ -5,7 +5,6 @@
 #ifndef MYWEBSERVER_LOG_H
 #define MYWEBSERVER_LOG_H
 
-
 #include <mutex>
 #include <string>
 #include <thread>
