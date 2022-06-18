@@ -23,8 +23,8 @@ class Webserver {
 //    bool InitSocket();
 //    void InitEventMode(int trigMode);
 //    void AddClient(int fd , sockaddr_in addr);
-
-
+public:
+    void print();
 };
 
 

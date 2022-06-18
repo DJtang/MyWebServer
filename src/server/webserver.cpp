@@ -3,3 +3,8 @@
 //
 
 #include "webserver.h"
+#include <iostream>
+
+void Webserver::print(){
+    std::cout<<"a"<<std::endl;
+}
