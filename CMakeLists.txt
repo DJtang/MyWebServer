@@ -21,7 +21,6 @@ set(path src/buffer src/http src/log src/pool src/server src/timer)
 # 查找 src 目录下的所有源文件并将名称保存到 DIR_SRCS 变量
 aux_source_directory(src DIR_SRCS)
 
-
 ## 通过cmake打印能获取的所有环境变量
 #execute_process(
 #        COMMAND ${CMAKE_COMMAND} -E environment
@@ -29,7 +28,13 @@ aux_source_directory(src DIR_SRCS)
 
 
 # 添加需要编译的子目录
-#add_subdirectory()
+add_subdirectory(src/buffer)
+add_subdirectory(src/http)
+add_subdirectory(src/log)
+add_subdirectory(src/pool)
+add_subdirectory(src/server)
+add_subdirectory(src/timer)
+
 
 # 添加寻找头文件的目录
 include_directories(${path})
@@ -40,11 +45,12 @@ include_directories(${path})
 
 #message(${PROJECT_SOURCE_DIR})
 #message("include_dirs = ${DIR_SRCS}")
-message("${CMAKE_SYSTEM_NAME}")
-
+#message("${CMAKE_SYSTEM_NAME}")
+#message("${SOURCE}")
 
 # 生成可执行文件
-add_executable(MyWebServer ${DIR_SRCS})
+add_executable(MyWebServer ${DIR_SRCS} ${SOURCE})
 
 # 链接静态函数库
-target_link_libraries(MyWebServer pthread mysqlclient)
+#target_link_libraries(MyWebServer pthread mysqlclient)
+target_link_libraries(MyWebServer Buffer Http Log Pool Server Timer)
