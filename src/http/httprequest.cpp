@@ -7,7 +7,7 @@ using namespace std;
 
 const unordered_set<string> HttpRequest::DEFAULT_HTML{
         "/index", "/register", "/login",
-        "/welcome", "/video", "/picture", };
+        "/welcome", "/video", "/picture","/upload" };
 
 const unordered_map<string, int> HttpRequest::DEFAULT_HTML_TAG {
         {"/register.html", 0}, {"/login.html", 1},  };
@@ -129,6 +129,9 @@ void HttpRequest::ParsePost_() {
                 }
             }
         }
+    }
+    else if(method_ == "POST" && header_["enctype"] == "multipart/form-data"){
+
     }
 }
 
