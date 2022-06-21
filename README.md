@@ -21,11 +21,8 @@ linux下高并发c++http服务器，经过webbench压力测试，可以达到300
 ## Business functions
 
 - 登录和注册
-- 
-
-
-
-
+- 播放视频
+- 查看图片
 
 ## Model
 
