@@ -23,17 +23,20 @@ linux下高并发c++http服务器，经过webbench压力测试，可以达到300
 - 登录和注册
 - 播放视频
 - 查看图片
+- 文件上传 （只能上传小文件)
 
 ## Model
 
-
+![网络模型](https://cdn.jsdelivr.net/gh/DJtang/picx_ima@main/网络模型.204t2i64owg0.webp)
 
 ## TODO
 
-- 文件上传
 - 静态文件预先加载进入内存，加快访问
+- 快速路由
+- 大文件的上传
 
 ## Reference
 
 - Linux高性能服务器编程 游双著
 - Linux多线程服务端编程---使用muduo C++网络库  陈硕著 
+-  [TinyWebServer]( https://github.com/qinguoyi/TinyWebServer)
