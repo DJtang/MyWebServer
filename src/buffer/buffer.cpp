@@ -83,7 +83,7 @@ void Buffer::EnsureWriteable(size_t len) {
 }
 
 ssize_t Buffer::ReadFd(int fd, int* saveErrno) {
-    char buff[65535];
+    char buff[320000];
     struct iovec iov[2];
     const size_t writable = WritableBytes();
     /* 分散读， 保证数据全部读完 */

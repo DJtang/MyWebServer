@@ -12,7 +12,8 @@ const unordered_set<string> HttpRequest::DEFAULT_HTML{
 const unordered_map<string, int> HttpRequest::DEFAULT_HTML_TAG {
         {"/register.html", 0}, {"/login.html", 1},  };
 
-void HttpRequest::Init() {
+void HttpRequest::Init(const string& srcDir) {
+    srcDir_ = srcDir;
     method_ = path_ = version_ = body_ = "";
     state_ = REQUEST_LINE;
     header_.clear();
@@ -27,16 +28,17 @@ bool HttpRequest::IsKeepAlive() const {
 }
 
 bool HttpRequest::parse(Buffer& buff) {
-    const char CRLF[] = "\r\n";
     if(buff.ReadableBytes() <= 0) {
         return false;
     }
+    LOG_DEBUG("/n--------------------BufferSize:%d--------------------------",buff.ReadableBytes());
     while(buff.ReadableBytes() && state_ != FINISH) {
         const char* lineEnd = search(buff.Peek(), buff.BeginWriteConst(), CRLF, CRLF + 2);
         std::string line(buff.Peek(), lineEnd);
         switch(state_)
         {
             case REQUEST_LINE:
+                LOG_DEBUG("--------------------in REQUEST_LINE:%s",line.data());
                 if(!ParseRequestLine_(line)) {
                     return false;
                 }
@@ -44,18 +46,23 @@ bool HttpRequest::parse(Buffer& buff) {
                 break;
             case HEADERS:
                 ParseHeader_(line);
+                LOG_DEBUG("--------------------in HEADERS: ReadableBytes:%d--------------------------",buff.ReadableBytes());
                 if(buff.ReadableBytes() <= 2) {
                     state_ = FINISH;
                 }
                 break;
             case BODY:
-                ParseBody_(line);
+                ParseBody_(line,buff);
                 break;
             default:
                 break;
         }
-        if(lineEnd == buff.BeginWrite()) { break; }
-        buff.RetrieveUntil(lineEnd + 2);
+        if(lineEnd == buff.BeginWrite()) {
+            break;
+        }
+        if(buff.ReadableBytes()!=0) {
+            buff.RetrieveUntil(lineEnd + 2);
+        }
     }
     LOG_DEBUG("[%s], [%s], [%s]", method_.c_str(), path_.c_str(), version_.c_str());
     return true;
@@ -100,11 +107,11 @@ void HttpRequest::ParseHeader_(const string& line) {
     }
 }
 
-void HttpRequest::ParseBody_(const string& line) {
-    body_ = line;
-    ParsePost_();
+void HttpRequest::ParseBody_(const string& line, Buffer& buff) {
+    LOG_DEBUG("--------------------inParseBody--------------------------");
+    if(method_=="POST") ParsePost_(line,buff);
     state_ = FINISH;
-    LOG_DEBUG("Body:%s, len:%d", line.c_str(), line.size());
+    LOG_DEBUG("--------------Bodylen:%d--------------------", body_.size());
 }
 
 int HttpRequest::ConverHex(char ch) {
@@ -113,9 +120,11 @@ int HttpRequest::ConverHex(char ch) {
     return ch;
 }
 
-void HttpRequest::ParsePost_() {
+bool HttpRequest::ParsePost_(const string& line, Buffer& buff) {
+    LOG_DEBUG("--------------------inParsePost--------------------------");
     if(method_ == "POST" && header_["Content-Type"] == "application/x-www-form-urlencoded") {
-        ParseFromUrlencoded_();
+        body_ = line;
+        ParseFormUrlencoded_();
         if(DEFAULT_HTML_TAG.count(path_)) {
             int tag = DEFAULT_HTML_TAG.find(path_)->second;
             LOG_DEBUG("Tag:%d", tag);
@@ -130,13 +139,43 @@ void HttpRequest::ParsePost_() {
             }
         }
     }
-    else if(method_ == "POST" && header_["enctype"] == "multipart/form-data"){
-
+    else{
+        // 丢弃使用后的buffer
+        LOG_DEBUG("--------------------inParseFormdata--------------------------");
+        buff.Retrieve(line.length()+2);
+        post_["boundary"] = line;
+        LOG_DEBUG("boundary: %s",line.c_str());
+        while(true){
+            const char* tempEnd = search(buff.Peek(), buff.BeginWriteConst(), CRLF,CRLF+2);
+            string temp = string(buff.Peek(),tempEnd);
+            buff.Retrieve(temp.length()+2);
+            regex patten("^([^ ])*:");
+            smatch subMatch;
+            bool flag = regex_search(temp,subMatch,patten);
+            string key = subMatch[0];
+            if(key=="Content-Disposition:"){
+                regex patten("filename=\"(.*)\"");
+                smatch subMatch;
+                regex_search(temp,subMatch,patten);
+                string filename = subMatch[0];
+                post_["filename"] = filename.substr(10,filename.size()-11);
+            }
+            if(temp.empty()) break;
+        }
+        LOG_DEBUG("--------------------inregex--------------------------");
+        const char* lineEnd = search(buff.Peek(), buff.BeginWriteConst(), line.begin(), line.end());
+        body_ = string(buff.Peek(),lineEnd);
+        LOG_DEBUG("--------------------body-------------------------");
+        ParseFormData_();
+        LOG_DEBUG("---------------------buff.RetrieveAll------------------------");
+        buff.RetrieveAll();
+        LOG_DEBUG("--------------------buffMaxSize:%d-------------------------",buff.WritableBytes());
+        path_ = "/success.html";
     }
 }
 
-void HttpRequest::ParseFromUrlencoded_() {
-    if(body_.size() == 0) { return; }
+void HttpRequest::ParseFormUrlencoded_() {
+    if(body_.empty()) { return; }
 
     string key, value;
     int num = 0;
@@ -174,6 +213,20 @@ void HttpRequest::ParseFromUrlencoded_() {
         value = body_.substr(j, i - j);
         post_[key] = value;
     }
+}
+
+void HttpRequest::ParseFormData_() {
+    char path[10] = "./temp";
+    char filename[FILE_NAME_LEN] ={0};
+    snprintf(filename,FILE_NAME_LEN,"%s/%s",path,post_["filename"].c_str());
+    LOG_DEBUG("------------inParseFormData readfile:%s------------",filename);
+    if(access(path,0777)==-1){
+        mkdir(path,0777);
+    }
+    FILE* fp_ = fopen(filename,"w");
+    fwrite(body_.c_str(),1,body_.size(),fp_);
+    //fflush(fp_);
+    fclose(fp_);
 }
 
 bool HttpRequest::UserVerify(const string &name, const string &pwd, bool isLogin) {
@@ -221,7 +274,7 @@ bool HttpRequest::UserVerify(const string &name, const string &pwd, bool isLogin
     mysql_free_result(res);
 
     /* 注册行为 且 用户名未被使用*/
-    if(!isLogin && flag == true) {
+    if(!isLogin && flag) {
         LOG_DEBUG("regirster!");
         bzero(order, 256);
         snprintf(order, 256,"INSERT INTO user(username, passwd) VALUES('%s','%s')", name.c_str(), pwd.c_str());
@@ -268,3 +321,4 @@ std::string HttpRequest::GetPost(const char* key) const {
     }
     return "";
 }
+

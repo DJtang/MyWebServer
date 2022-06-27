@@ -38,10 +38,10 @@ public:
         CLOSED_CONNECTION,
     };
 
-    HttpRequest() { Init(); }
+    HttpRequest() = default;
     ~HttpRequest() = default;
 
-    void Init();
+    void Init(const std::string& srcDir);
     bool parse(Buffer& buff);
 
     std::string path() const;
@@ -61,16 +61,20 @@ public:
 private:
     bool ParseRequestLine_(const std::string& line);
     void ParseHeader_(const std::string& line);
-    void ParseBody_(const std::string& line);
+    void ParseBody_(const std::string& line, Buffer& buff);
 
     void ParsePath_();
-    void ParsePost_();
-    void ParseFromUrlencoded_();
+    bool ParsePost_(const std::string& line, Buffer& buff);
+    void ParseFormUrlencoded_();
+    void ParseFormData_();
+
 
     static bool UserVerify(const std::string& name, const std::string& pwd, bool isLogin);
+    static const int FILE_NAME_LEN = 256;
+    const char CRLF[3] = "\r\n";
 
     PARSE_STATE state_;
-    std::string method_, path_, version_, body_;
+    std::string method_, path_, version_, body_, srcDir_;
     std::unordered_map<std::string, std::string> header_;
     std::unordered_map<std::string, std::string> post_;
 
